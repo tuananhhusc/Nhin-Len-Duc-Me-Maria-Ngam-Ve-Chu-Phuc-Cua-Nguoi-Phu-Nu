@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Đức Mẹ Maria - Báo Cáo Chuyên Sâu (Academic Report App)
 
-## Getting Started
+Dự án web hiện đại trình bày báo cáo nghiên cứu thần học và văn hóa về Đức Mẹ Maria, tập trung vào chiều kích chữ "Phúc" của người phụ nữ qua lăng kính Công giáo và truyền thống Á Đông.
 
-First, run the development server:
+## 🌟 Tổng Quan Dự Án
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Website được thiết kế với phong cách học thuật (Academic Styling), tối ưu hóa cho trải nghiệm đọc văn bản dài, kết hợp các công nghệ web hiện đại để mang lại sự trang trọng và chiều sâu.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Chủ đề:** Nhìn Lên Đức Mẹ Maria, Ngẫm Về Chữ Phúc Của Người Phụ Nữ.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Công Nghệ Sử Dụng
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS 4
+- **Animation:** Framer Motion
+- **Content:** Markdown (React-Markdown)
+- **Typography:**
+  - `Cormorant Garamond`: Cho các tiêu đề trang trọng.
+  - `Source Serif 4`: Cho nội dung chính (body text) tối ưu đọc lâu.
+  - `Be Vietnam Pro`: Cho các yếu tố giao diện (UI).
+- **Phân tích nội dung:** `remark-gfm` cho bảng biểu và cú pháp markdown mở rộng.
 
-## Learn More
+## ✨ Tính Năng Nổi Bật
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Giao diện Học thuật:** Thiết kế tối giản, sang trọng với các yếu tố như Drop Cap (chữ cái khởi đầu), Blockquote nghệ thuật và vạch ngăn cách (hr) cổ điển.
+2.  **Mục lục Thông minh (TOC):** Tự động trích xuất các tiêu đề từ Markdown, hỗ trợ cuộn mượt và đánh dấu mục đang đọc.
+3.  **Hệ thống Chú thích (Footnotes):** Chú thích hiển thị dạng Tooltip hiện đại khi di chuột, giúp người đọc không bị ngắt quãng dòng suy nghĩ.
+4.  **Giải thuật Glossary:** Tự động nhận diện các thuật ngữ chuyên môn (Kecharitomene, Fiat, ...) và hiển thị định nghĩa khi tương tác.
+5.  **Chế độ Tối (Dark Mode):** Tối ưu hóa độ tương phản cho việc đọc vào ban đêm, bảo vệ thị lực.
+6.  **Responsive Design:** Giao diện co giãn hoàn hảo trên mọi thiết bị, từ máy tính để bàn đến điện thoại di động.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Cấu Trúc Thư Mục
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/app`: Chứa logic định tuyến, layout và metadata.
+- `/components`: Các thành phần giao diện tái sử dụng.
+- `/content`: File `report.md` - Nguồn nội dung chính của báo cáo.
+- `/lib`: Các hàm tiện ích (Parser, Constants, Utils).
+- `/public`: Chứa hình ảnh và tài nguyên tĩnh.
 
-## Deploy on Vercel
+## 🚀 Hướng Dẫn Chạy Dự Án
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Cài đặt dependencies:**
+    ```bash
+    npm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2.  **Chạy môi trường phát triển:**
+    ```bash
+    npm run dev
+    ```
+
+3.  **Xây dựng bản sản xuất (Production):**
+    ```bash
+    npm run build
+    ```
+
+## 📝 Bản Quyền
+
+© 2026 Báo Cáo Chuyên Sâu. Mọi nội dung thuộc về dự án "Đức Mẹ Maria".
+"Ad Maiorem Dei Gloriam Cho Vinh Danh Chúa Hơn"

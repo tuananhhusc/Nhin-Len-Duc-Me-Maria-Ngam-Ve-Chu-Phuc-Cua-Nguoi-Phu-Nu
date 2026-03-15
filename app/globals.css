@@ -1,26 +1,411 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fcfcea;
+  --foreground: #2d2d2d;
+  --accent-primary: #1e3a5f;
+  --accent-secondary: #c9a758;
+  --accent-quote: #a11111;
+  --card-bg: #ffffff;
+  --card-border: #e5e5e5;
+  --muted: #6b6b6b;
+}
+
+.dark {
+  --background: #1a1a2e;
+  --foreground: #e8e8e8;
+  --accent-primary: #4a7db8;
+  --accent-secondary: #d4af37;
+  --accent-quote: #c94444;
+  --card-bg: #242440;
+  --card-border: #3a3a5a;
+  --muted: #9a9a9a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-quote: var(--accent-quote);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-muted: var(--muted);
+  --font-serif: var(--font-cormorant);
+  --font-body: var(--font-source-serif);
+  --font-sans: var(--font-be-vietnam);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Source Serif 4 làm font nền toàn trang tối ưu dấu tiếng Việt */
+  font-family: var(--font-source-serif), Georgia, serif;
+  line-height: 1.85;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background-color: var(--accent-secondary);
+  color: var(--background);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-secondary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+.prose-catholic {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--accent-primary);
+  --tw-prose-links: var(--accent-primary);
+  --tw-prose-bold: var(--accent-primary);
+  --tw-prose-counters: var(--accent-secondary);
+  --tw-prose-bullets: var(--accent-secondary);
+  --tw-prose-quotes: var(--accent-quote);
+  --tw-prose-quote-borders: var(--accent-secondary);
+}
+
+.dark .prose-catholic {
+  --tw-prose-headings: var(--accent-secondary);
+  --tw-prose-bold: var(--accent-secondary);
+}
+
+/* Giới hạn độ rộng dòng ~75 ký tự chuẩn đọc học thuật */
+.content-area {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1280px) {
+  .content-area {
+    max-width: 60rem;
+  }
+}
+
+/* === Văn bản học thuật tiếng Việt === */
+.academic-prose {
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: 1.075rem;
+  line-height: 1.95;
+  text-align: justify;
+  hyphens: none;               /* Không ngắt chữ trình duyệt không biết âm tiết tiếng Việt */
+  word-break: break-word;
+  overflow-wrap: break-word;
+  letter-spacing: 0.01em;
+  color: var(--foreground);
+}
+
+/* === Drop Cap (Chữ cái hoa đầu dòng) === */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-cormorant), serif;
+  font-size: 4.5rem;
+  line-height: 0.8;
+  padding-top: 0.2rem;
+  padding-right: 0.6rem;
+  padding-left: 0.1rem;
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.dark .drop-cap::first-letter {
+  color: var(--accent-secondary);
+}
+
+/* Đoạn văn */
+.academic-prose p {
+  margin-bottom: 1.35em;
+  orphans: 3;
+  widows: 3;
+}
+
+.academic-prose p:first-of-type {
+  margin-top: 0;
+}
+
+/* Paragraphs sau heading: không thụt lề đầu dòng (flat academic style) */
+.academic-prose h2 + p,
+.academic-prose h3 + p {
+  margin-top: 0;
+}
+
+/* Headings: Cormorant Garamond thanh thoát, học thuật */
+.academic-prose h1,
+.academic-prose h2,
+.academic-prose h3,
+.academic-prose h4 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  text-align: left;
+  letter-spacing: -0.015em;
+  color: var(--accent-primary);
+}
+
+.dark .academic-prose h1,
+.dark .academic-prose h2,
+.dark .academic-prose h3,
+.dark .academic-prose h4 {
+  color: var(--accent-secondary);
+}
+
+/* H2 = tiêu đề chương gạch vàng trái, khoảng cách rõ ràng */
+.academic-prose h2 {
+  margin-top: 2.6em;
+  margin-bottom: 0.75em;
+  padding-left: 0.875rem;
+  border-left: 3.5px solid var(--accent-secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.academic-prose h2:first-of-type {
+  margin-top: 0;
+}
+
+/* H3 = tiêu đề mục nhỏ hơn, không border */
+.academic-prose h3 {
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* Bold: cùng màu thân bài, chỉ tăng weight chuẩn học thuật */
+.academic-prose strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+/* Danh sách học thuật: outside style, indent rõ ràng */
+.academic-prose ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 1.75em;
+  margin-bottom: 1.35em;
+}
+
+.academic-prose ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  padding-left: 1.75em;
+  margin-bottom: 1.35em;
+}
+
+.academic-prose li {
+  margin-bottom: 0.5em;
+  padding-left: 0.25em;
+  line-height: 1.85;
+}
+
+.academic-prose li:last-child {
+  margin-bottom: 0;
+}
+
+/* Trích dẫn học thuật không trang trí, chỉ viền trái + nghiêng */
+.academic-prose .blockquote-card {
+  margin: 1.75em 0 1.75em 0.5rem;
+  padding: 0.875rem 1.5rem 0.875rem 1.25rem;
+  text-align: left;
+  background: rgba(201, 167, 88, 0.05);
+}
+
+.dark .academic-prose .blockquote-card {
+  background: rgba(212, 175, 55, 0.06);
+}
+
+/* Bảng */
+.academic-prose table {
+  font-size: 0.9375rem;
+  width: 100%;
+}
+
+/* Phân cách section */
+.academic-prose hr {
+  margin: 2.5em 0;
+  border: none;
+  border-top: 1px solid var(--card-border);
+}
+
+/* === TOC Sidebar === */
+.toc-sidebar {
+  width: 18rem;
+  min-width: 18rem;
+  background: var(--background);
+  /* Viền vàng mảnh bên phải như ảnh tham chiếu */
+  border-right: 3px solid var(--accent-secondary);
+}
+
+@media (min-width: 1280px) {
+  .toc-sidebar {
+    width: 20rem;
+    min-width: 20rem;
+  }
+}
+
+.toc-drawer {
+  background: var(--background);
+  border-right: 1px solid var(--card-border);
+}
+
+/* Nút chapter chính Be Vietnam Pro, compact */
+.toc-main-btn {
+  font-family: var(--font-be-vietnam), system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--accent-secondary);   /* inactive: màu vàng gold nhạt như ảnh */
+}
+
+/* Active: bold, màu đậm (foreground/dark) không tô nền, không border-left */
+.toc-active {
+  font-weight: 700;
+  color: var(--accent-primary);   /* xanh đậm */
+}
+
+.dark .toc-active {
+  color: var(--foreground);
+}
+
+/* Inactive hover: sáng lên xíu */
+.toc-inactive {
+  color: var(--accent-secondary);
+  opacity: 0.85;
+}
+
+.toc-inactive:hover {
+  opacity: 1;
+  color: var(--foreground);
+}
+
+/* Subsection buttons */
+.toc-sub-btn {
+  font-family: var(--font-be-vietnam), system-ui, sans-serif;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.toc-sub-active {
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.dark .toc-sub-active {
+  color: var(--foreground);
+}
+
+.toc-sub-inactive {
+  color: var(--muted);
+}
+
+.toc-sub-inactive:hover {
+  color: var(--foreground);
+}
+
+.footnote-ref {
+  cursor: pointer;
+  color: var(--accent-primary);
+  font-size: 0.75rem;
+  vertical-align: super;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footnote-ref:hover {
+  color: var(--accent-secondary);
+}
+
+/* Blockquote học thuật: chỉ viền trái vàng, không trang trí */
+.blockquote-card {
+  border-left: 3.5px solid var(--accent-secondary);
+  font-style: italic;
+  color: var(--foreground);
+}
+
+/* Tài liệu tham khảo APA: treo dòng thứ hai trở đi (hanging indent) */
+.reference-item {
+  padding-left: 2rem;
+  text-indent: -2rem;
+}
+
+.reference-item .ref-text {
+  display: inline;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Academic Tables */
+.academic-table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-secondary) transparent;
+}
+
+.academic-table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.academic-table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.academic-table-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--accent-secondary);
+  border-radius: 10px;
 }
